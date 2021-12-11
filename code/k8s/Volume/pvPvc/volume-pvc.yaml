@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc1
+  namespace: dev
+spec:
+  accessModes: # 访问模式
+    - ReadWriteMany
+  resources: # 请求空间
+    requests:
+      storage: 1Gi
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc2
+  namespace: dev
+spec:
+  accessModes: # 访问模式
+    - ReadWriteMany
+  resources: # 请求空间
+    requests:
+      storage: 2Gi
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc3
+  namespace: dev
+spec:
+  accessModes: # 访问模式
+    - ReadWriteMany
+  resources: # 请求空间
+    requests:
+      storage: 3Gi

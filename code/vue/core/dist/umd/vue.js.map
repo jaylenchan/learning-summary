@@ -1,0 +1,1 @@
+{"version":3,"file":"vue.js","sources":["../../src/index.js"],"sourcesContent":["/**\n * 这里头是Vue的核心代码\n */\nimport initMixin from './init'\nconst Vue = function(options) {\n  \n}\nini\nexport default Vue"],"names":["Vue","options","ini"],"mappings":";;;;;;EAAA;EACA;EACA;;MAEMA,GAAG,GAAG,SAANA,GAAM,CAASC,OAAT,EAAkB;;EAG9BC,GAAG;;;;;;;;"}

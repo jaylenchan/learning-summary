@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cm-nginx
+  namespace: dev
+
+spec:
+  volumes:
+    - name: nginx-cm
+      configMap:
+        name: nginx-configmap
+  containers:
+    - name: cm-nginx
+      image: nginx:1.17.1
+      volumeMounts:
+        - name: nginx-cm
+          mountPath: /configmap/config

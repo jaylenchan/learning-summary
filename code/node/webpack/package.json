@@ -1,0 +1,14 @@
+{
+  "name": "webpack",
+  "version": "1.0.0",
+  "description": "a bundle tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "work.cjl",
+  "license": "ISC",
+  "devDependencies": {
+    "neo-async": "^2.6.2"
+  }
+}

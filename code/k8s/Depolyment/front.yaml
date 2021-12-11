@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: cicd-front
+spec:
+  selector:
+    matchLabels:
+      app: cicd-front
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cicd-front
+    spec:
+      imagePullSecrets:
+        - name: private-registry
+      containers:
+        - name: cicd-frontend
+          image: 10.211.55.21:4000/front/front:1.2

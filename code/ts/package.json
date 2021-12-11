@@ -1,0 +1,32 @@
+{
+  "name": "typescript",
+  "version": "0.0.0",
+  "description": "typescript学习",
+  "keywords": [
+    "typescript"
+  ],
+  "author": "下山化缘的小和尚 <work.cjl@hotmail.com>",
+  "homepage": "https://github.com/workcjl/blog#readme",
+  "license": "ISC",
+  "main": "index.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "http://npm.gz.ekwing.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/workcjl/blog.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/workcjl/blog/issues"
+  }
+}

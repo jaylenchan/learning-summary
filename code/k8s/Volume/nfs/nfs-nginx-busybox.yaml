@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nfs-nginx-busybox
+  namespace: dev
+
+spec: 
+  volumes:
+    - name: nfs-logs
+      nfs:
+        path: /root/data/nfs
+        server: 10.211.55.22
+  containers:
+    - name: nfs-nginx
+      image: nginx:1.17.1
+      volumeMounts:
+        - name: nfs-logs
+          mountPath: /var/log/nginx
+      ports:
+        - containerPort: 80
+    - name: nfs-busybox
+      image: busybox:1.30
+      volumeMounts:
+        - name: nfs-logs
+          mountPath: /logs
+      command:
+        - '/bin/sh'
+        - '-c'
+        - 'tail -f /logs/access.log'

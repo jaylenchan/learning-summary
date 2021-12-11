@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>模态窗口</title>
+</head>
+<body>
+  <button id="toggleLogin">ToggleLogin</button>
+  <script>
+    let isLogin = false
+    class Login {
+      constructor() {
+        this.element = document.createElement('div')
+        this.element.innerHTML = (
+          `
+            用户名 <input type="text"/>
+            密码 <input type="password"/>
+            <input type="submit" value="登录"/>
+          `
+        )
+        this.element.style.cssText= `width: 100px; height: 100px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: none;`
+        document.body.appendChild(this.element)
+      }
+      static getInstance() {
+        if(!this.instance) this.instance = new Login()
+        return this.instance
+      }
+      show() {
+        this.element.style.cssText = `display: block`
+      }
+      hide() {
+        this.element.style.cssText = `display: none`
+      }
+    }
+    document.querySelector('#toggleLogin').addEventListener('click', function() {
+      isLogin ? Login.getInstance().hide() : Login.getInstance().show()
+      isLogin = !isLogin
+      console.log(Login.getInstance() === Login.getInstance())
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv1
+spec:
+  nfs: # 存储类型
+    path: /root/data/pv1
+    server: 10.211.55.22
+  accessModes: # 访问模式
+    - ReadWriteMany
+  capacity: # 存储能力
+    storage: 1Gi
+  persistentVolumeReclaimPolicy: Retain # 回收策略
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv2
+spec:
+  nfs: # 存储类型
+    path: /root/data/pv2
+    server: 10.211.55.22
+  accessModes: # 访问模式
+    - ReadWriteMany
+  capacity: # 存储能力
+    storage: 2Gi
+  persistentVolumeReclaimPolicy: Retain # 回收策略
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv3
+spec:
+  nfs: # 存储类型
+    path: /root/data/pv3
+    server: 10.211.55.22
+  accessModes: # 访问模式
+    - ReadWriteMany
+  capacity: # 存储能力
+    storage: 3Gi
+  persistentVolumeReclaimPolicy: Retain # 回收策略

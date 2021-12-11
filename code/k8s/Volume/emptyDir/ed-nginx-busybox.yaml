@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ed-nginx-busybox
+  namespace: dev
+spec:
+  volumes:
+    - name: ed-logs
+      emptyDir: {}
+  containers:
+    - name: ed-nginx
+      image: nginx:1.17.1
+      volumeMounts:
+        - name: ed-logs
+          mountPath: /var/log/nginx
+      ports:
+        - containerPort: 80
+    - name: ed-busybox
+      image: busybox:1.30
+      volumeMounts:
+        - name: ed-logs
+          mountPath: /logs
+      command:
+        - '/bin/sh'
+        - '-c'
+        - 'tail -f /logs/access.log'

@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hp-nginx-busybox
+  namespace: dev
+spec:
+  volumes:
+    - name: hp-logs
+      hostPath:
+        path: /root/logs
+        type: DirectoryOrCreate
+  containers:
+    - name: hp-nginx
+      image: nginx:1.17.1
+      volumeMounts:
+        - name: hp-logs
+          mountPath: /var/log/nginx
+      ports:
+        - containerPort: 80
+    - name: hp-busybox
+      image: busybox:1.30
+      volumeMounts:
+        - name: hp-logs
+          mountPath: /logs
+      command:
+        - '/bin/sh'
+        - '-c'
+        - 'tail -f /logs/access.log'
