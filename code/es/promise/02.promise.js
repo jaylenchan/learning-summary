@@ -1,3 +1,4 @@
+#! 
 const PENDING = "PENDING"; // 未完成
 const RESOLVE = "RESOLVE"; // 已完成
 const REJECTED = "REJECTED"; // 已失败
@@ -9,7 +10,7 @@ class PromiseA {
     this.error_reason = undefined;
     this.success_callbacks = [];
     this.eroor_callbacks = [];
-    let resolve = (success_response) => {
+    const resolve = (success_response) => {
       if (this.state === PENDING) {
         this.state = RESOLVE;
         this.success_response = success_response;
@@ -17,7 +18,7 @@ class PromiseA {
           this.success_callbacks.forEach((scb) => scb());
       }
     };
-    let reject = (error_reason) => {
+    const reject = (error_reason) => {
       if (this.state === PENDING) {
         this.state = REJECTED;
         this.error_reason = error_reason;
