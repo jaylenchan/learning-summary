@@ -19,13 +19,28 @@ interface IStaff {
   goHome(): void
 }
 
+class Foot {}
+
 class Staff extends Person implements IStaff {
   public jobNumber: number
-
+  public feet: Array<Foot>
   public code(): void {
     console.log('打代码')
   }
   goHome(): void {
     console.log('下班回家')
   }
+}
+
+class Be {}
+class Boss {}
+class Friend {}
+class Fe extends Staff {
+  public bes: Array<Be>
+  public boss: Boss
+  public friends: Array<Friend>
+}
+
+class Company {
+  public staffs: Array<Staff>
 }

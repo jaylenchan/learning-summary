@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Like</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script>
+    const likeState = {
+      render(el) {
+        el.innerHTML = '赞'
+      }
+    }
+
+    const cancelState = {
+      render(el) {
+        el.innerHTML = '取消'
+      }
+    }
+    class Button {
+      constructor(container) {
+        this.liked = false
+        this.state = likeState
+        this.el = document.createElement('button')
+        container.appendChild(this.el)
+        this.render()
+      }
+      render() {
+        this.state.render(this.el)
+      }
+      setState(state) {
+        this.state = state
+        this.render()
+      }
+    }
+    const button = new Button(document.body)
+    button.el.addEventListener('click', () => {
+      button.setState(button.liked ? cancelState : likeState)
+      button.liked = !button.liked
+    })
+  </script>
+</body>
+
+</html>
