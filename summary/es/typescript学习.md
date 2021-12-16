@@ -1,3 +1,5 @@
+# TS学习
+
 ## ts环境搭建
 
 - 安装`node`环境：`https://nodejs.org/zh-cn/`

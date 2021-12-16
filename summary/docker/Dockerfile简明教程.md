@@ -1,12 +1,10 @@
 <div align="center">
-  <img 
+  <img
   src="https://raw.githubusercontent.com/workcjl/image_store/main/img/dockerfile.png" alt="RBAC Tutorial"/>
   <h1 align="center">
   Dockerfile简明教程
   </h1>
 </div>
-
-
 
 如果你想要自己做一个Docker镜像，那么你可以有两种方法去制作一个自己的镜像。一种方式是利用Docker命令`docker commit`，而另外一种更好的方式就是使用Dockerfile文件。Docker引擎它认识Dockerfile，可以读取Dockerfile文件中的一行行的指令，来帮助你去构建镜像。
 
@@ -19,8 +17,6 @@
 ---
 
 使用Dockerfile就好像写一份菜谱一样，我们想要特朗普知道怎么样去炒一道小鸡炖蘑菇，我们首先将小鸡炖蘑菇的制作流程写出来成为一份菜谱，特朗普拿到菜谱之后就知道如何去制作一道小鸡炖蘑菇了。Dockerfile本质上就是一个文本文件，我们可以在Dockerfile文件上一行行写好如何去构建我们想要的镜像，然后交给Docker引擎去按照我们在Dockerfile上要求的做法去构建我们的镜像。
-
-
 
 ## 指令详解
 

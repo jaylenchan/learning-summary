@@ -1,3 +1,4 @@
+# Jenkins
 ## 设置中文
 
 - 下载插件`Locale plugin`

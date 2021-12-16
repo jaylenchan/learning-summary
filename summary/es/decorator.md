@@ -1,3 +1,5 @@
+# Decorator
+
 1. 现在我们要建立一个工具，工具有一个功能是获取数据
 
    ```javascript
@@ -25,7 +27,7 @@
 
  于是有：
 
-添加方式一： 
+添加方式一：
 
 ```javascript
 getData() {
@@ -79,7 +81,7 @@ function log(model, key) {
 }
 ```
 
-​     
+​
 
 方法装饰器：
 
@@ -119,4 +121,3 @@ class Race {
   
 }
 ```
-

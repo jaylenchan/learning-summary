@@ -1,3 +1,5 @@
+# Typescript环境配置
+
 ## 环境配置
 
 全局安装TS`npm install typescript -g`

@@ -1,4 +1,5 @@
 # HTTP核心概念
+
 ### 1）什么是HTTP?应用层
 
 通常的网络是在TCP/IP协议族的基础上来运作的，HTTP是一个子集。
@@ -17,7 +18,7 @@
 
 - 网络层 IP 选择传输路线 (通过ip地址和mac地址)(使用ARP协议凭借mac地址进行通信)
 
-- 链路层 网络连接的硬件部分 
+- 链路层 网络连接的硬件部分
 
 ![](http://img.zhufengpeixun.cn/tpchttp.png)
 
@@ -33,13 +34,13 @@
 
 不验证通信方的身份
 
-无法验证内容的完整性 (内容可能被篡改) 
+无法验证内容的完整性 (内容可能被篡改)
 
 > 通过SSL（安全套阶层）建立安全通信线路 HTTPS (超文本传输安全协议)
 
 ### 6) HTTP方法 (get post  简单请求) Resful风格  /user
 
-跨域：跨域有哪些解决方案，window.name  jsonp iframe webscokect  cors nginx 
+跨域：跨域有哪些解决方案，window.name  jsonp iframe webscokect  cors nginx
 
 请求我发送了delete 请求 -》 options预检请求 检测一下 我能不能访问你
 
@@ -58,7 +59,7 @@ get / post + 自定义的header  复杂请求了
 
 - OPTIONS:询问支持的方法   跨域 如果默认发送的是get/post 不会发送options的 ""复杂请求""
 
-  get /post (a:1) headers:{a:1}   put / delete 复杂的请求 
+  get /post (a:1) headers:{a:1}   put / delete 复杂的请求
 
 **REST API** Resful风格 根据路径和不同的方法 就能确定对资源进行什么操作  
 
@@ -116,7 +117,7 @@ URI(Uniform Resource Identifier)是统一资源标识符,在某个规则下能�
 
 ![](http://img.zhufengpeixun.cn/urlformat.png)
 
-### 10) 报文应用 
+### 10) 报文应用
 
 Content-Encoding : gzip压缩                  form-data: 多部分对象集合  上传文件
 

@@ -1,3 +1,5 @@
+# git学习
+
 ## 版本控制
 
 ### 个人版本控制
@@ -91,18 +93,16 @@ To https://gitee.com/chen_pub/git_version_management.git
  11 #
 ```
 
-
-
 #### 创建本地库
 
-- `git init`创建一个新的本地库（其实就是创建.git目录）
+* `git init`创建一个新的本地库（其实就是创建.git目录）
 
 ```powershell
 $ git init
 Initialized empty Git repository in G:/个人练习/【07】工程化/Git/代码/git_demo01/.git/
 ```
 
-- `git init` 效果
+* `git init` 效果
 
 ```powershell
 $ ls -A
@@ -181,7 +181,7 @@ $ cat .gitconfig
 
 #### 查看工作区、暂存区的状态
 
-- `git status`效果1
+* `git status`效果1
 
 ```powershell
 $ git status
@@ -193,7 +193,7 @@ nothing to commit (create/copy files and use "git add" to track)【暂存区里�
 ## track追踪的理解：让git去管理这个文件
 ```
 
-- `git status`效果2
+* `git status`效果2
 
 ```powershell
 $ git status
@@ -211,7 +211,7 @@ nothing added to commit but untracked files present (use "git add" to track)
 （请使用git add命令让这个文件被Git进行管理）
 ```
 
-- `git status`效果3
+* `git status`效果3
 
 ```powershell
 $ git status
@@ -226,7 +226,7 @@ Changes to be committed: # 【暂存区里的】更改即将被提交到【本�
         new file:   new.txt
 ```
 
-- `git status`效果4
+* `git status`效果4
 
 ```powershell
 $ git status
@@ -234,7 +234,7 @@ On branch master # 当前查看的是主分支的状态
 nothing to commit, working tree clean # 【暂存区里】没有要提交的东西，【工作区里】是干净的
 ```
 
-- `git status`效果5
+* `git status`效果5
 
 ```powershell
 $ git status
@@ -453,8 +453,6 @@ index e69de29..074fcb8 100644
 # 修复两个分支修改了同一个地方合并时发生冲突的问题
 ```
 
-
-
 ### 远程库操作
 
 #### 创建远程库
@@ -502,10 +500,10 @@ index e69de29..074fcb8 100644
 
 ### 跨团队合作
 
-- B团队fork A团队的远程库一份【结果就是A团队和B团队各有一个长得一样的远程库】
-- 于是从以后开始，B团队对自己fork下来的这个远程库进行拉取，然后代码开发，再推送【其实又回到了团队内合作的流程】
-- 当B团队开发完毕之后，就提pull request，申请代码合并
-- A团队看到pull request之后，就可以对代码进行审核，审核通过merge
+* B团队fork A团队的远程库一份【结果就是A团队和B团队各有一个长得一样的远程库】
+* 于是从以后开始，B团队对自己fork下来的这个远程库进行拉取，然后代码开发，再推送【其实又回到了团队内合作的流程】
+* 当B团队开发完毕之后，就提pull request，申请代码合并
+* A团队看到pull request之后，就可以对代码进行审核，审核通过merge
 
 ### 分支实战
 
@@ -546,8 +544,6 @@ $ 个人疑问：直接修复hotfix分支合并到master难道不会出现修复
 @命名 hotfix/bug编号
 ```
 
-
-
 ## commit规范
 
 ```bash
@@ -578,8 +574,6 @@ $ 个人疑问：直接修复hotfix分支合并到master难道不会出现修复
 # commit相关联的issue（如果有的话）
 @issue的地址
 ```
-
-
 
 # Gitlab
 
@@ -655,8 +649,6 @@ $ 同意完合并请求后，功能分支feature/task就会被删除了
 @查看图表
 `Repository->Graph->选择指定分支查看提交情况`
 ```
-
-
 
 # Gitflow
 

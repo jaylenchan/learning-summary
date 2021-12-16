@@ -1,3 +1,5 @@
+# Vue核心应用
+
 ## 实例属性
 
 ```vue
@@ -65,7 +67,7 @@ vm.msg = 100 //只会监控到这个100
 5. v-bind
 v-bind:class
 <div :class="{ red: false, green: true }"></div> # 多个class（对象写法）
-<div :class="['red', 'green']"></div> # 多个class （数组写法	）
+<div :class="['red', 'green']"></div> # 多个class （数组写法 ）
 <style>
   .red {
     color: red
@@ -131,7 +133,7 @@ export default {
 }
 </script>
 v-model修饰符
-v-model.lazy懒更新，失去焦点才更新	
+v-model.lazy懒更新，失去焦点才更新 
 v-model.number 只能输入熟悉数字
 v-model.trim 去除空格
 ```
@@ -231,4 +233,3 @@ BDD就是先开发再测试（一般是黑盒测试）
 - Karma 可以把代码放到浏览器中测试，帮我们测试ui
 - mocha 只提供一个测试环境，但是测试的功能需要自己安装（断言库：chai，sinon）
 - jest 不用启动浏览器，利用jsdom模拟浏览器环境。不能测试渲染出来的结果。0配置
-
