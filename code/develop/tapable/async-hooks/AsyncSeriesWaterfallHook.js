@@ -18,14 +18,10 @@ class AsyncSeriesWaterfallHook {
     const next = (err, data) => {
       const task = this.tasks[index]
       if (!task) return finalCb()
-      if (index === 0) {
-        task(...args, next) //第一个执行传入初始参数
-      } else {
-        task(data, next)
-      }
+      task(data, next)
       index++
     }
-    next()
+    next(null, ...args)
   }
 
   promise(...args) {}
