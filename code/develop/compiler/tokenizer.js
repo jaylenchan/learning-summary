@@ -15,10 +15,6 @@ function emit(token) {
   tokens.push(token)
 }
 
-// function eof() {
-//   if (currentToken.value.length > 0) emit(currentToken)
-// }
-
 function jsxText(char) {
   if (char === '<') {
     emit(currentToken) //{ type: 'JSXText', value: 'hello' },
