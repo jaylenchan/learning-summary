@@ -87,3 +87,7 @@ HTTP是一种没有状态的协议。客户端发送http请求给服务端，服
 ### keepalive_requests指令
 
 用来配置1次keep-alive长连接可以允许接收的请求最多多少次。超过这个次数，长连接断开。
+
+### server块
+
+### location块
