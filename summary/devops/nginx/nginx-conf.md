@@ -52,3 +52,38 @@
 用来设置nginx服务器要使用哪一种事件驱动来处理网络消息。配置语法：`use method;`
 
 ## http块
+
+### MIME-Type
+
+浏览器可以展示HTML、GIF、IMAGE很多种类的资源。为了区分这些资源，浏览器就需要使用MIME- Type来区分，MIME-Type是网络资源的媒体类型。而nginx作为响应前端的服务器，也需要能够识别前端请求的这些资源类型。在nginx.conf文件当中，默认就有两行配置用类设置MIMI-Type
+
+```?nginx
+http{
+  include mime.types;
+  default-type application/octet-stream;
+}
+```
+
+### default-type指令
+
+用来配置nginx响应前端请求的默认资源类型。配置语法`default-type 资源类型`
+
+### 自定义服务日志
+
+`access.log`是用来记录一个用户访问nginx的所有的访问请求的。
+`error.log`是用来记录nginx本身运行的时候出现的错误信息，它是不会去记录用户的访问信息的。
+我们可以使用`access_log`指令来配置用户访问日志的属性。`access_log`指令可以在http块以及server块和 location块中进行配置。然后除此之外，我们可以使用`log_format`来配置日志输出的格式。`log_format`块只能在http块中配置。
+
+### sendfile指令
+
+用来配置nginx服务器是否使用sendfile这个函数去处理文件的传输。不经过用户内核发送文件。配置语法：`sendfile on(off)`。开发建议打开这个选项。
+
+### keepalive_timeout指令
+
+HTTP是一种没有状态的协议。客户端发送http请求给服务端，服务端返回响应后，一次请求就完成了。于是在不做任何其他操作下整个连接就算断开了。等下次客户端再次发起http请求的时候，再重新创建一个新的连接。为了一直保持着连接，我们可以使用keepalive去解决这个问题。但是呢，这个连接也不能一直保持着，因为如果连接过多，服务器的性能也会下降，这种时候，就需要我们去设置超时的时间，让这个连接能够断开。keepalive_timeout指令就是做这件事情的。
+
+配置语法：`keepalive_timeout time`举例子：`keepalive_timeout 75s`。
+
+### keepalive_requests指令
+
+用来配置1次keep-alive长连接可以允许接收的请求最多多少次。超过这个次数，长连接断开。
