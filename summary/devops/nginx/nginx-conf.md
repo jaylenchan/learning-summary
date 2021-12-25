@@ -90,6 +90,16 @@ HTTP是一种没有状态的协议。客户端发送http请求给服务端，服
 
 ### server块
 
-用来配置服务器
+每个http块中可以放置多个server块。每个server块中可以放置多个location块。
+配置语法：
+
+```?nginx
+server {
+  listen 80
+  server_name jaylen.com
+}
+```
+
+以上两部分分别是1个nginx服务器监听的端口和展示在url当中用来请求的域名，即`jaylen.com:80`，其中80可以省略。而具体的后边的url路由正是由location来处理的。
 
 ### location块
