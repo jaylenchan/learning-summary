@@ -101,5 +101,3 @@ server {
 ```
 
 以上两部分分别是1个nginx服务器监听的端口和展示在url当中用来请求的域名，即`jaylen.com:80`，其中80可以省略。而具体的后边的url路由正是由location来处理的。
-
-### location块
