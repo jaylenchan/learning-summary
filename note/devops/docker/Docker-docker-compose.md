@@ -27,7 +27,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 ## 命令模板
 
 ```shell
-version: 3
+version: "3"
 
 services:
   web:
@@ -38,6 +38,8 @@ services:
       - nginx:/etc/nginx # 相当于docker run -v nginx:/etc/nginx
     networks: # 为了让整个项目的容器工作在一个自定义的网络中
     	- web # 相当于docker run --net web 
+    env_file:
+      - nginx.env # 使用env_file可以替代enviroment进行环境变量设置，将环境变量还是以key=val的形式存储在`xx.env`结尾的文件当中，当docker-compose启动的时候就会去查找相关后缀的文件，并把里头的环境变量注入到容器当中。
     build:
       context: '.'
       dockerfile: 'dokerfile'
