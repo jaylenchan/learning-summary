@@ -1,5 +1,9 @@
 # docker-compose
 
+docker-compose的作用就是为了去编排一组容器的。它是以项目为核心，在项目中定义一组具有相同业务的容器并运行起来。
+
+
+
 ## 服务和项目
 
 service：1个service其实就是一个应用容器。即`docker run --name xxx nginx`命令跑起来的一个应用容器。
@@ -11,7 +15,11 @@ project：1个project是由多个service组成的一组有相同业务逻辑的�
 ## 安装docker-compose
 
 ```shell
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+```
 
+```shell
+sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 
