@@ -9,10 +9,10 @@ services:
       - nginx:/etc/nginx # 相当于docker run -v nginx:/etc/nginx
     networks: # 为了让整个项目的容器工作在一个自定义的网络中
     	- web # 相当于docker run --net web 
-    build:
-      context: '.'
+    build: # 在启动服务时用来将指定的dockerfile脚本进行执行构建出对应的镜像，然后使用该镜像
+      context: '.' # 指定dockerfile所在的目录，路径计算时相对于docker-compose.yml所在的目录进行计算
       dockerfile: 'dokerfile'
-    depends_on: # 代表着这个服务依赖于哪些服务，要等到那些服务所属的容器启动后，这个服务所属的容器才启动
+    depends_on: # 代表着这个服务依赖于哪些服务，要等到那些服务所属的容器启动后，这个服务所属的容器才启动(不过不是说等到彻底启动后，这个才会启动，而是依赖服务启动到一定程度了，这个就可以启动了)
       - mysql  # 说明web服务必须等到mysql服务启动后，才能启动！这里写的是服务名，而不是container_name容器名！
 
   mysql:
