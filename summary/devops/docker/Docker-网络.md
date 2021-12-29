@@ -1,5 +1,7 @@
 # 网络
 
+## docker0
+
 ```shell
 [root@localhost ~]# ip addr
 # 以下有三个网络，分别代表了三个不同环境
@@ -31,3 +33,171 @@
 ```
 
 我们每启动一个docker容器，docker就会给docker容器分配一个ip。当我们装上了docker之后，就会拥有一个docker0网卡，是桥接模式的，使用的技术就是evth-pair技术。evth-pair就是一对虚拟设备接口，是成对出现的，一段连着协议，一段彼此相连。正因为有这个特性，才使用evth-pair充当桥梁，专门连接各种虚拟网络设备。docker容器之间的连接就是用的这种技术。
+
+![img](https://github.com/jaylenchan/learning-summary/blob/main/pic/docker-%E5%AE%B9%E5%99%A8%E7%BD%91%E7%BB%9C.png?raw=true)
+
+容器1和容器2是共用的一个路由器-docker0。所有的容器不指定网络的情况下，都是docker0负责路由的，docker会给容器分配一个默认的可用ip。但是只要docker容器删除或者重启，ip就会变化，这样子每次启动都不同ip，对我们应用不友好，我们想要的是能够通过类似域名的方式去访问，而不论ip如何变化，最终都能找到对应名字的服务。
+
+
+
+## 查看所有docker网络
+
+```shell
+[root@localhost ~]# docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+37c3f659d7a1   bridge    bridge    local
+c8fbd96dbd65   host      host      local
+9201f6eeeb36   none      null      local
+```
+
+网络模式：
+
+1. bridge桥接模式
+2. none不配置网络
+3. host主机模式：和宿主机共享网络
+4. container容器网络互联模式：局限性大，很少用
+
+
+
+## 查看具体网络信息
+
+输入`docker inspect 网络id`
+
+```shell
+[root@localhost ~]# docker inspect 37c3f659d7a1
+[
+    {
+        "Name": "bridge",
+        "Id": "37c3f659d7a1f4f2ab242061332e994780de64edb8f8c14171a02922b2548b30",
+        "Created": "2021-12-28T17:25:06.321343701+08:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "172.17.0.0/16"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {},
+        "Options": {
+            "com.docker.network.bridge.default_bridge": "true",
+            "com.docker.network.bridge.enable_icc": "true",
+            "com.docker.network.bridge.enable_ip_masquerade": "true",
+            "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
+            "com.docker.network.bridge.name": "docker0",
+            "com.docker.network.driver.mtu": "1500"
+        },
+        "Labels": {}
+    }
+]
+```
+
+
+
+
+## 容器互联--link
+
+```shell
+docker run --name tomcat1 --link  tomcat2 tomcat
+```
+
+使用--link就可以实现刚刚产生的问题，但是这种方式的坑还是比较多的。其实能够用这种`tomcat02`	的方式，本质是因为tomcat1在hosts中增加了tomcat2的host而已。真实开发当中，不建议使用`--link`!所以说使用docker0网络是不适用名字方式去访问的。一般开发当中，我们还是会使用自定义网络的方式去玩docker。
+
+
+
+## 自定义网络
+
+输入`docker network create 自定义网络名 --driver 指定网络模式（不写默认是bridge模式）--subnet 子网（比如192.168.0.0/16）--gateway 网关（192.168.0.1） `
+
+```shell
+[root@localhost ~]# docker network create mynet \
+> --driver bridge \
+> --subnet 192.168.0.0/16 \
+> --gateway 192.168.0.1
+a1ae83ffe4df922d53011a9fc61e6491b1054673c0beed745ba4f997a5677e40
+```
+
+```shell
+[root@localhost ~]# docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+37c3f659d7a1   bridge    bridge    local
+c8fbd96dbd65   host      host      local
+a1ae83ffe4df   mynet     bridge    local # 自定义的新网络
+9201f6eeeb36   none      null      local
+```
+
+```shell
+[root@localhost ~]# docker inspect a1ae83ffe4df
+[
+    {
+        "Name": "mynet",
+        "Id": "a1ae83ffe4df922d53011a9fc61e6491b1054673c0beed745ba4f997a5677e40",
+        "Created": "2021-12-29T11:57:42.355064358+08:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "192.168.0.0/16",
+                    "Gateway": "192.168.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {},
+        "Options": {},
+        "Labels": {}
+    }
+]
+```
+
+之后我们就可以使用这个网络，创建容器的时候加入这个网络当中了。自定义的网络天然支持名字的方式网络访问，内部已经帮我们维护好了相关的容器关系。使用自定义网络的好处是：不同的集群可以使用不同的网络，保证了集群的安全性。
+
+## 网络连通
+
+输入`docker network 自定义网络名 connect 容器名 `将某个容器加入docker自定义的网络当中。
+
+首先，我们先不将容器加入mynet自定义网络当中
+
+```shell
+[root@localhost ~]# docker exec -it nginx ping nginx01
+ping: nginx01: Name or service not known
+```
+
+我们发现，网络没法ping通。现在我们将容器加入网络中再试试
+
+```shell
+[root@localhost ~]# docker network connect mynet nginx
+[root@localhost ~]# docker network connect mynet nginx01
+[root@localhost ~]# docker exec -it nginx ping nginx01
+PING nginx01 (192.168.0.3) 56(84) bytes of data.
+64 bytes from nginx01.mynet (192.168.0.3): icmp_seq=1 ttl=64 time=0.844 ms
+64 bytes from nginx01.mynet (192.168.0.3): icmp_seq=2 ttl=64 time=0.083 ms
+64 bytes from nginx01.mynet (192.168.0.3): icmp_seq=3 ttl=64 time=0.088 ms
+64 bytes from nginx01.mynet (192.168.0.3): icmp_seq=4 ttl=64 time=0.104 ms
+64 bytes from nginx01.mynet (192.168.0.3): icmp_seq=5 ttl=64 time=0.077 ms
+64 bytes from nginx01.mynet (192.168.0.3): icmp_seq=6 ttl=64 time=0.083 ms
+64 bytes from nginx01.mynet (192.168.0.3): icmp_seq=7 ttl=64 time=0.097 ms
+```
+
+结果我们发现现在两个容器之间就可以ping通了，这就是docker网络连通。
