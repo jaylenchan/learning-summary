@@ -1,4 +1,4 @@
-version: 3
+version: "3"
 
 services:
   web:
@@ -12,6 +12,8 @@ services:
     build:
       context: '.'
       dockerfile: 'dokerfile'
+    depends_on: # 代表着这个服务依赖于哪些服务，要等到那些服务所属的容器启动后，这个服务所属的容器才启动
+      - mysql  # 说明web服务必须等到mysql服务启动后，才能启动！这里写的是服务名，而不是container_name容器名！
 
   mysql:
     container_name: 'mysql01'

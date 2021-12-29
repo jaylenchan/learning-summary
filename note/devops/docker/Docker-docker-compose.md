@@ -38,11 +38,11 @@ services:
       - nginx:/etc/nginx # 相当于docker run -v nginx:/etc/nginx
     networks: # 为了让整个项目的容器工作在一个自定义的网络中
     	- web # 相当于docker run --net web 
-    env_file:
-      - nginx.env # 使用env_file可以替代enviroment进行环境变量设置，将环境变量还是以key=val的形式存储在`xx.env`结尾的文件当中，当docker-compose启动的时候就会去查找相关后缀的文件，并把里头的环境变量注入到容器当中。
     build:
       context: '.'
       dockerfile: 'dokerfile'
+    depends_on: # 代表着这个服务依赖于哪些服务，要等到那些服务所属的容器启动后，这个服务所属的容器才启动
+      - mysql  # 说明web服务必须等到mysql服务启动后，才能启动！这里写的是服务名，而不是container_name容器名！
 
   mysql:
     container_name: 'mysql01'
