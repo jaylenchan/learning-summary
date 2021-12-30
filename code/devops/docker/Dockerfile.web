@@ -1,0 +1,8 @@
+FROM nginx:stable-alpine
+
+LABEL description="xxxx"
+LABEL url="xxxx"
+LABEL maintainer="jaylen.chan@hotmail.com"
+
+# 时区设置
+RUN ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo Asia/Shanghai >/etc/timezone
