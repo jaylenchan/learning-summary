@@ -11,10 +11,8 @@ docker run [--参数] 镜像名
 1. `--name=“容器名字”` 给容器起名字，用来区分容器
 2. `-d` 放在后台运行此容器
 3. `-it`以交互的方式运行容器，进去容器查看内容
-4. `-p`指定容器的端口。格式`-p 主机端口：容器端口 `，意思是将容器端口映射到主机端口上
+4. `-p`指定容器的端口。格式`-p 主机端口：容器端口`，意思是将容器端口映射到主机端口上
 5. `-P`随机指定容器的端口
-
-
 
 ## 查看正在运行的容器
 
@@ -22,8 +20,6 @@ docker run [--参数] 镜像名
 [root@localhost ~]# docker ps
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ```
-
-
 
 ## 退出容器
 
@@ -34,8 +30,6 @@ exit
 ctrl+P+Q
 ```
 
-
-
 ## 删除容器
 
 ```shell
@@ -43,8 +37,6 @@ docker rm 容器id
 docker rm -f 容器id
 docker ps -aq | xargs docker rm # 删除所有容器
 ```
-
-
 
 ## 启动容器
 
@@ -57,8 +49,6 @@ docker restart 容器id
 docker run -d 镜像名
 ```
 
-
-
 ## 停止容器
 
 ```shell
@@ -68,15 +58,11 @@ docker stop 容器id
 docker kill 容器id
 ```
 
-
-
 ## 查看容器信息
 
 ```shell
 docker insepct 容器id
 ```
-
-
 
 ## 进入当前正在运行的容器
 
@@ -87,11 +73,8 @@ docker exec -it 容器id bashshell
 docker attach 容器id
 ```
 
-
-
 ## 将容器里的文件拷贝到主机上
 
 ```shell
 docker cp 容器id:文件路径 主机上的文件路径
 ```
-

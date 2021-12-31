@@ -13,15 +13,11 @@ sudo yum remove docker \
                   docker-engine
 ```
 
-
-
 ## 2. 安装必备辅助工具
 
 ```shell
 yum install -y yum-utils
 ```
-
-
 
 ## 3. 配置docker阿里云镜像源
 
@@ -29,15 +25,11 @@ yum install -y yum-utils
 yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 ```
 
-
-
 ## 4. 下载docker
 
 ```shell
 yum install docker-ce docker-ce-cli containerd.io
 ```
-
-
 
 ## 5. 启动docker
 
@@ -45,15 +37,11 @@ yum install docker-ce docker-ce-cli containerd.io
 systemctl start docker
 ```
 
-
-
 ## 6. 查看docker版本
 
 ```
 docker  --version
 ```
-
-
 
 ## 7. 测试docker
 
@@ -99,4 +87,3 @@ yum remove docker-ce docker-ce-cli containerd.io
 rm -rf /var/lib/docker
 rm -rf /var/lib/containerd
 ```
-

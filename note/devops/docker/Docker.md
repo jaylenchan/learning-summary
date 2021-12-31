@@ -62,8 +62,6 @@ docker-compose --version
 rm /usr/local/bin/docker-compose
 ```
 
-
-
 ## 容器<=>文件
 
 ```shell
@@ -132,15 +130,11 @@ EXPOSE 3000 /** 暴露3000端口*/
 docker build -t 镜像名字 . /** 这个点说明的是Dockerfile的工作地方，会去这个地方找Dockerfile*/
 ```
 
-
-
 启动容器
 
 ```shell
 docker container create --name node_container 镜像名字
 ```
-
-
 
 ## 创建数据卷
 
@@ -238,7 +232,7 @@ docker network connect fi_net nginx2
 
 工程上，常常是一个服务对应一个容器，而这些服务我们还需要根据服务的功能有选择的按顺序去启动容器，我们不太可能不安顺序去启动。比如web容器需要api服务的容器。如果先启动web需要请求api的时候找不到服务器，就直接挂了。所以编排容器启动是很重要的。我们需要用到docker-compose去帮我们编排容器。
 
-```
+```shell
 yum install  -y epel-release
 yum install -y python-pip
 ```
@@ -301,46 +295,42 @@ volumes:
     driver: local
 ```
 
-```
-
-
+```shell
 connection.end();
 ```
 
 ## Dockerfile
 
-```
+```shell
 COPY
 exec格式
 shell格式
 ```
 
-```
+```shell
 ENV 设置环境变量
 ENV <key> <val>
 ENV <key>=<val>
 ```
 
-```
+```shell
 ARG 设置环境变量
 ARG <key>=<val>
-
 ```
 
-```
+```shell
 VOLUME 存储卷
-
 ```
 
-```
+```shell
 ONBUILD 配合基础镜像使用
 ```
 
-```
+```shell
 LABEL 标签，可以说明一些镜像信息
 ```
 
-```
+```shell
 构建镜像的阶段，如果只是想构建多阶段的其中一个阶段的时候，那么可以在构建的时候，加上--target=xxx
 docker build --target=builder -t 镜像名字 .
 ```
@@ -369,7 +359,4 @@ Release file for http://security.debian.org/debian-security/dists/bullseye-secur
 # 解决方式：同步时钟的问题
 ```
 
-
-
 ### Dockerfile最佳实践
-

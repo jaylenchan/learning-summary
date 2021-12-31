@@ -9,8 +9,6 @@
 docker run -it -v 主机目录:容器目录 --name centos1 centos
 ```
 
-
-
 ## 具名挂载和匿名挂载
 
 ```shell
@@ -24,15 +22,11 @@ docker run -v nginx:/etc/nginx nginx
 docker volume inspect 卷id/卷名
 ```
 
-
-
 ## 查看所有数据卷
 
 ```shell
 docker volume ls
 ```
-
-
 
 ## 指定挂载数据卷的读写权限
 
@@ -45,8 +39,6 @@ docker run -v nginx:/etc/nginx:ro nginx
 
 docker run -v nginx:/etc/nginx:rw nginx
 ```
-
-
 
 ## 多个容器间数据共享
 
