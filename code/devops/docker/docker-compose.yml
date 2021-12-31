@@ -14,7 +14,9 @@ services:
       dockerfile: 'dokerfile'
     depends_on: # 代表着这个服务依赖于哪些服务，要等到那些服务所属的容器启动后，这个服务所属的容器才启动(不过不是说等到彻底启动后，这个才会启动，而是依赖服务启动到一定程度了，这个就可以启动了)
       - mysql  # 说明web服务必须等到mysql服务启动后，才能启动！这里写的是服务名，而不是container_name容器名！
-
+    restart: always # 如果挂掉了，总是自动重启
+    extra_hosts: # 往往用在公司内网当中。比如jenkins服务，在web容器内部要想使用jenkins.jaylen.com访问，但是又处在内网当中，就必须添加host。使用后就会在/etc/hosts下增加一条host配置
+      - "jenkins.jaylen.com:10.211.55.5"
   mysql:
     container_name: 'mysql01'
     ports:
@@ -24,6 +26,7 @@ services:
     enviroment: # 定义环境变量
       - MYSQL_ROOT_PASSWORD=root
     image: mysql:5.7.32
+    restart: always
 
 
 volumes:

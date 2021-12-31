@@ -6,3 +6,7 @@ LABEL maintainer="jaylen.chan@hotmail.com"
 
 # 时区设置
 RUN ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo Asia/Shanghai >/etc/timezone
+# inetutils-ping(ping命令)
+# net-tools(ifconfig命令)
+RUN apt-get install -y inetutils-ping \
+  net-tools

@@ -1,0 +1,15 @@
+FROM node:lts-alpine as builder
+
+LABEL app-name="whistle代理服务器" \
+  release-date="2021-12-30" \
+  author="jaylenchan" \
+  github="github.com/jaylenchan" \
+  email="jaylen.chan@hotmail.com"
+
+RUN apk add bash &&
+  ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo Asia/Shanghai >/etc/timezone &&
+  npm install whistle -g
+
+EXPOSE 8899
+
+ENTRYPOINT ['w2', 'run']

@@ -1,0 +1,13 @@
+FROM node:lts-alpine
+
+LABEL app-name="webapp" \
+  release-date="2021-12-30" \
+  author="jaylenchan" \
+  github="github.com/jaylenchan" \
+  email="jaylen.chan@hotmail.com"
+
+RUN apk add bash wget && ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo Asia/Shanghai >/etc/timezone
+
+WORKDIR /webapp
+
+CMD yarn dev
