@@ -50,5 +50,16 @@
 
 ## Remote - Container
 
+Visual Studio Code Remote - Containers扩展允许您使用Docker容器作为一个全功能的开发环境。它允许您打开容器内部(或安装到容器中)的任何文件夹，并利用Visual Studio Code的完整功能集。devcontainer.json文件告诉VS Code如何使用定义良好的工具和运行时堆栈去访问(或创建)一个开发容器。此容器可用于运行应用程序，或用于分离使用代码库所需的工具、库或运行时。工作空间文件从本地文件系统挂载或复制或克隆到容器中。扩展在容器中安装和运行，在容器中它们可以完全访问工具、平台和文件系统。这意味着您可以通过连接到不同的容器来无缝切换整个开发环境。
+
+这让VS Code提供了本地质量的开发体验，包括完整的智能感知(完成)、代码导航和调试，而不管你的工具(或代码)位于哪里。
+
+
+
+- 如何使用Docker容器来建立一个与本地环境隔离的开发环境。
+- 如何通过使用Remote - Containers扩展在Docker容器中运行Visual Studio Code
+- 如何在container当中打开一个你电脑中已经存在的文件夹，去为现有的项目设置一个container开发容器，作为你的开发环境容器。
+- 如何在container当中打开一个github项目
+
 ## Remote - WSL
 
