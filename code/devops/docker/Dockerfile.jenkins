@@ -1,0 +1,57 @@
+ARG REGISTRY=jenkins/jenkins
+ARG VERSION=lts-jdk11
+
+# 基于Jenkins长期支持版进行构建
+FROM ${REGISTRY}:${VERSION}
+
+LABEL maintainer="jaylen.chan@hotmail.com"
+
+# 切换用户到root，用最高权限执行下边
+USER root
+
+# 同步时区
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &&
+  echo 'Asia/Shanghai' >/etc/timezone
+
+# 配置apt源改成国内阿里源
+RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list &&
+  sed -i s@/deb.debian.org/@/mirrors.aliyun.com/@g /etc/apt/sources.list
+
+# 下载定制工具 - 因为docker里头都是简化版的啥都没有
+# 优化1： DEBIAN_FRONTEND=noninteractive - 也是一个ENV，不过在这里写是为了只在这条命令生效。
+# 不直接设置ENV是因为ENV命令在整个容器运行过程中都会生效
+# 优化2： --no-install-recommends这个参数，不安装非必须的依赖包
+# 优化3：清除遗留在 /var/cache 中的已取回的包文件的本地仓库。它清除的目录是 /var/cache/apt/archives/ 和 /var/cache/apt/archives/partial/。它留在 /var/cache/apt/archives 中的唯一文件是 lock 文件和 partial 子目录。
+# 优化4： rm -rf /var/lib/apt/lists/* 减少最终镜像的大小。通常是可以减少21M以上
+RUN DEBIAN_FRONTEND=noninteractive apt-get update &&
+  apt-get install -y --no-install-recommends \
+    curl \
+    wget \
+    vim &&
+  apt-get clean &&
+  rm -rf /var/lib/apt/lists/*
+
+# 跳过Jenkins初始化页面的插件安装
+ENV JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+
+# 拷贝Jenkins插件配置
+COPY install-plugins.yaml /usr/share/jenkins/ref/install-plugins.yaml
+
+# 根据插件配置下载Jenkins插件
+RUN jenkins-plugin-cli --plugin-file /usr/share/jenkins/ref/install-plugins.yaml
+
+# 拷贝用户自定义插件到docker指定插件位置
+# COPY --chown=jenkins:jenkins ./custom/*.hpi /usr/share/jenkins/ref/plugins/
+
+# 定义环境变量
+# CASC_JENKINS_CONFIG - Configuration as code 要求的环境变量，定义后会在这个文件夹下找yaml配置文件
+ENV CASC_JENKINS_CONFIG=$JENKINS_HOME/casc_configs
+
+# 在docker里头建立对应的文件夹
+RUN mkdir ${CASC_JENKINS_CONFIG}
+
+# 拷贝当前文件夹下的yaml配置到docker里头对应的路径去
+COPY jenkins.yaml ${CASC_JENKINS_CONFIG}/jenkins.yaml
+
+# 声明容器暴露了8080端口 - 主要还是提示作用
+EXPOSE 8080
