@@ -61,5 +61,16 @@ Visual Studio Code Remote - Containers扩展允许您使用Docker容器作为一
 - 如何在container当中打开一个你电脑中已经存在的文件夹，去为现有的项目设置一个container开发容器，作为你的开发环境容器。
 - 如何在container当中打开一个github项目
 
+
+
+1. 第一步，以你的dockerfile或者填写的`image:name`为构建镜像的依据，构建出你想要的镜像
+2. 第二步，会以构建出来的镜像去运行一个容器，当这个容器启动的时候，容器就会使用你在`devcontainer.json`当中定义的配置
+3. 第三步，最后你的vscode就会以你的`devcontainer.json`为依据去重新配置
+4. 第四步，一旦以上的工作完成之后，新创建出来的容器里的vscode sever将会产生一个代码副本并在你本地的vscode中显示出来
+
+首先，克隆你的gitlab远程仓库。然后进入该目录，使用remote container扩展，建立.devcontainer文件夹，这个文件夹包含着你想要建立的开发容器需要的环境。
+
+当我们建立好之后，就reopen container，然后就会以.devcontainer文件夹中的dockerfile创建出对应的镜像，然后进而启动开发容器。里头的环境就拥有了你自定制的环境。
+
 ## Remote - WSL
 
