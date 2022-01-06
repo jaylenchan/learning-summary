@@ -11,6 +11,7 @@
 			"VARIANT": "16-bullseye"
 		}
 	},
+	"image": "learning-summary",
   "runArgs": ["--env-file", ".devcontainer/.env"],
 	// Set *default* container specific settings.json values on container create.
 	"settings": {},
