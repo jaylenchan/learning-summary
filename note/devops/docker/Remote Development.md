@@ -81,3 +81,4 @@ Visual Studio Code Remote - Containers扩展允许您使用Docker容器作为一
 
 ## Remote - WSL
 
+由于本人并未使用Windows系统，所以暂时用不到WSL，后续有用windows并使用到WSL再更新这部分内容。
