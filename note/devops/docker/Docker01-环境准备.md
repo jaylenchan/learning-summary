@@ -6,12 +6,16 @@
   </h1>
 </div>
 
-- **[1. 检测并卸载旧版docker](#1. 检测并卸载旧版docker)**
-- **[搜索镜像](#搜索镜像)**
-- **[下载镜像](#下载镜像)**
-- **[删除镜像](#删除镜像)**
+- **[检测并卸载旧版docker](#检测并卸载旧版docker)**
+- **[安装必备辅助工具](#安装必备辅助工具)**
+- **[配置docker阿里云镜像源](#配置docker阿里云镜像源)**
+- **[下载docker](#下载docker)**
+- **[启动docker](#启动docker)**
+- **[查看docker版本](#查看docker版本)**
+- **[测试docker](#测试docker)**
+- **[卸载docker](#卸载docker)**
 
-## 1. 检测并卸载旧版docker
+## 检测并卸载旧版docker
 
 ```shell
 sudo yum remove docker \
@@ -24,38 +28,38 @@ sudo yum remove docker \
                   docker-engine
 ```
 
-## 2. 安装必备辅助工具
+## 安装必备辅助工具
 
 ```shell
 yum install -y yum-utils
 ```
 
-## 3. 配置docker阿里云镜像源
+## 配置docker阿里云镜像源
 
 ```shell
 yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 ```
 
-## 4. 下载docker
+## 下载docker
 
 ```shell
 yum install docker-ce docker-ce-cli containerd.io
 ```
 
-## 5. 启动docker
+## 启动docker
 
 ```shell
 systemctl enable socker # 设置开机自启动
 systemctl start docker
 ```
 
-## 6. 查看docker版本
+## 查看docker版本
 
 ```
 docker  --version
 ```
 
-## 7. 测试docker
+## 测试docker
 
 ```shell
  docker run hello-world
@@ -86,7 +90,7 @@ For more examples and ideas, visit:
  https://docs.docker.com/get-started/
 ```
 
-## 8. 卸载docker
+## 卸载docker
 
 ```shell
 # 第一步 使用yum卸载 Docker Engine、CLI 和 Containerd 包
