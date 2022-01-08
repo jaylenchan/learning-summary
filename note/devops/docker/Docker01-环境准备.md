@@ -1,4 +1,19 @@
-# 环境准备
+<div align="center">
+  <img
+  src="https://raw.githubusercontent.com/workcjl/image_store/main/img/docker-command.png" alt="Docker环境准备"/>
+  <h1 align="center">
+  Docker环境准备
+  </h1>
+</div>
+
+- **[1. 检测并卸载旧版docker](#1. 检测并卸载旧版docker)**
+- **[2. 安装必备辅助工具](#2. 安装必备辅助工具)**
+- **[3. 配置docker阿里云镜像源](#3. 配置docker阿里云镜像源)**
+- **[4. 下载docker](#4. 下载docker)**
+- **[5. 启动docker](# 5. 启动docker)**
+- **[6. 查看docker版本](#6. 查看docker版本)**
+- **[7. 测试docker](#7. 测试docker)**
+- **[8. 卸载docker](#8. 卸载docker)**
 
 ## 1. 检测并卸载旧版docker
 
@@ -34,6 +49,7 @@ yum install docker-ce docker-ce-cli containerd.io
 ## 5. 启动docker
 
 ```shell
+systemctl enable socker # 设置开机自启动
 systemctl start docker
 ```
 
@@ -87,3 +103,4 @@ yum remove docker-ce docker-ce-cli containerd.io
 rm -rf /var/lib/docker
 rm -rf /var/lib/containerd
 ```
+

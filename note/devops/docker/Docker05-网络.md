@@ -1,4 +1,18 @@
-# 网络
+<div align="center">
+  <img
+  src="https://raw.githubusercontent.com/workcjl/image_store/main/img/docker-command.png" alt="Docker网络"/>
+  <h1 align="center">
+  Docker网络
+  </h1>
+</div>
+
+- **[docker0](#docker0)**
+- **[查看所有docker网络](#查看所有docker网络)**
+- **[查看具体网络信息](#查看具体网络信息)**
+- **[容器互联--link](#容器互联--link)**
+- **[自定义网络](#自定义网络)**
+- **[网络连通](#网络连通)**
+- **[删除没被用到的网桥](#删除没被用到的网桥)**
 
 使用传统的手法安装nginx和mysql的时候，这两个服务都是安装在一台机子上的，也就是我们的宿主机。因此安装完毕后，我们可以在nginx当中使用localhost+mysql的端口访问到mysql服务。但是当我们使用了docker的时候，nginx和mysql被安装在了两个容器身上，也就是相当于安装在了两台主机上，那么这个时候我们就无法在nginx当中使用localhost+mysql的端口去访问mysql服务了。但是为了完成项目服务之间的通信，我们就不可避免要进行容器与容器之间的通信。所谓的容器通信其实指的就是容器之间如何通过网络进行通信。
 
