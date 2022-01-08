@@ -1,10 +1,11 @@
 <div align="center">
   <img
-  src="https://raw.githubusercontent.com/workcjl/image_store/main/img/docker-command.png" alt="Docker环境准备"/>
+  src="https://github.com/jaylenchan/learning-summary/blob/main/pic/docker-components1.png?raw=true" alt="Docker环境准备"/>
   <h1 align="center">
   Docker环境准备
   </h1>
 </div>
+Docker的工作流就如同我们在电脑上从应用商店下载软件，再打开运行软件的过程十分类似。我们可以使用**Docker Client**去操作**Docker Server**获取使用**Image**运行**Container**。这里的**Image**镜像就类似于QQ软件，我们需要从应用商店**Registry**下载下来，然后再在我们的电脑上把QQ软件进程跑起来，也就是把**Container**跑起来。
 
 - **[检测并卸载旧版docker](#检测并卸载旧版docker)**
 - **[安装必备辅助工具](#安装必备辅助工具)**
