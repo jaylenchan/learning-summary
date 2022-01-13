@@ -7,3 +7,7 @@
 - 在开发当中，我使用到了whistle服务器容器和webdev服务器容器。配置whistle规则的时候，发现送往127.0.0.1:80(webdev 所在端口)总是超时。
 
   解决：问题的原因在于开发思维还停留在本地开发，whislte和webdev放在同一个宿主机上，不同的端口监听。换成容器后，相当于是不同的主机上了，所以应该改成对应webdev容器所在的ip:port才对。由于我在配置docker-compose的时候，自定义了网络，所以whistle容器和webdev容器是一个网络里头的，因此规则改成`xxxx.com webdev`即可，即使用容器名即可在whistle容器发送请求到webdev容器，而不用显示的去指定ip。
+
+- windows10下载docker desktop，启动docker desktop系统弹窗报错“wsl2 installation is not compatible”
+
+  解决：下载wsl_update包更新一下wsl环境
