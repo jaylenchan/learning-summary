@@ -11,3 +11,7 @@
 - windows10下载docker desktop，启动docker desktop系统弹窗报错“wsl2 installation is not compatible”
 
   解决：下载wsl_update包更新一下wsl环境
+
+- windows系统下直接通过docker挂载宿主机.ssh目录到容器内，会出现报错，大致意思就是id_rsag给的权限过大，不可以与他人共享私钥，挂载到容器内失败的问题。
+
+  解决：
