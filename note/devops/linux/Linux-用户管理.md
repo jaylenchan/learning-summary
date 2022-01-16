@@ -52,11 +52,11 @@ centos7中，表示在10000-60000
 
 #### 创建用户相关的配置文件
 
-- `/etc/default/useradd` 创建用户命令useradd的配置文件
-- `/etc/skel` 存放着创建用户环境变量原始文件的存放地方（就是用来配置.隐藏文件存放的地方）
+- `/etc/skel` 存放着创建用户环境变量原始文件的存放地方（就是用来配置.隐藏文件存放的地方）每个用户创建起来的时候都会发现家目录下有以下几个文件：`.bash_logout`，`.bashrc`，`.profile`。这些文件都是从/etc/skel目录下的对应同名的文件复制过来的。
+- `/etc/default/useradd` 创建用户命令useradd的配置文件。有没有想过为啥创建用户的时候就是从`/etc/skel`下复制文件呢？其实就是跟`/etc/defaul//useradd`这个文件有关，是它在控制的。
 - `/etc/login.defs`存放着创建用户系统配置相关的文件
 
-#### 用户相关的命令
+### 用户相关的命令
 
 - `useradd`添加用户
 
@@ -67,6 +67,13 @@ centos7中，表示在10000-60000
   useradd test -g fe # 指定用户组的方式添加用户 - 添加用户属于fe组
   useradd test -e '2022/01/17' # 指定用户失效日期的方式添加用户 - vip会员场景
   useradd test -s /sbin/nologin -M  # 指定用户无家目录的方式添加用户 - 虚拟用户场景
+
+  # 以下是用脚本批量添加用户
+  #! /bin/bash
+  for n in {01..10}
+  do 
+    useradd test$n 
+  done
   ```
 
 - `id 用户名`查看指定uid用户部分信息
@@ -90,6 +97,34 @@ centos7中，表示在10000-60000
   # 生产中，一个人员离职了，最好的相关处理方式是，直接编辑/etc/passwd把他的密码注释掉
   ```
 
+### 密码相关的命令
+
+- `passwd`和`chpasswd`给用户设置密码
+  
+  ```sh
+  passwd # 直接给当前用户设置密码
+  passwd test  # root给其他用户设置密码 - 交互式设置密码
+  echo 12345|passwd --stdin test # root给其他用户设置密码 - 非交互式设置密码(centos系统)
+
+  # 以下是批量修改用户密码方法
+  ## 以“用户名:密码”的形式写各个用户想要修改的密码,假设该文件为user.pass
+  cjl01:01
+  cjl02:02
+  cjl03:03
+  ## 然后使用chpasswd的方式修改，有两种方式
+  ### 方式1
+  cat user.pass | chpasswd
+  ### 方式2
+  chpasswd <user.pass
+  
+  ```
+
+- `chage`查看和更改密码属性
+  
+  ```sh
+  chage root -E '2022/01/16' # 修改用户过期日期 【和useradd -e中的-e产生的效果一样】
+  ```
+
 ## 组管理
 
 用户的组类似于人的家庭/学校/企业等组
@@ -98,3 +133,13 @@ centos7中，表示在10000-60000
 
 1. 用户组会在创建用户的时候，默认情况下就会生成一个跟用户名一样名字的组。而且组的标识GID和用户的标识UID也是相同的。
 2. 由root用户直接取创建。
+
+### 组相关命令
+
+- `groupadd` 添加组
+  
+  ```sh
+  
+  ```
+
+- `groupdel` 删除组
