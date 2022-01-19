@@ -37,8 +37,6 @@
 Webpack
 ```
 
-
-
 ## Webpack
 
 ### 环境搭配
@@ -91,8 +89,6 @@ You can also set it to 'none' to disable any default behavior. Learn more: https
 
 ```
 
-
-
 ### Loader
 
 ```markdown
@@ -107,8 +103,6 @@ You can also set it to 'none' to disable any default behavior. Learn more: https
 3.当在index.js中遇到非js模块时，webpack就没法执行了
 4.webpack会去配置文件里找相应的模块module规则rules，在rules中寻找对应类型文件，最后找到该文件使用的loader，从而让loader去帮忙打包该类型的文件。
 ```
-
-
 
 #### 打包图片的loader
 
@@ -177,8 +171,6 @@ use: {
 # 打包图片问题
 在打包图片的时候如果index.html没有放在dist目录下，而是放在了public目录下，webpack就算打包成了，浏览器也会显示找不到该图片报错，原因暂时不知道是啥？
 ```
-
-
 
 #### 打包样式的loader
 
@@ -282,8 +274,6 @@ postcss-loader
 2.下载file-loader，并在配置文件新增一条处理字体的rule，使用的loader就是file-loader
 3.如果之前配置过css-loader的modules：true模块化css，需要去掉，这样在index.js中引入才会生效
 ```
-
-
 
 ### 插件
 
