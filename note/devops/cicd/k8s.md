@@ -7,7 +7,7 @@ K8S的目的就是实现资源管理的自动化。
 1. 每个节点安装的特定程序是一样的吗
 2. 每个节点安装的特定程序分别是什么？
 
-# 集群组成
+## 集群组成
 
 1个K8S集群主要由控制节点（做管理的）和工作节点（真正干活的）两部分组成。每个节点安装的组件并不是一样的。
 
@@ -51,7 +51,7 @@ K8S的目的就是实现资源管理的自动化。
 
 这样，外界用户就可以访问集群中的nginx服务了
 
-# 基本概念
+## 基本概念
 
 节点：一台服务器
 
@@ -71,7 +71,7 @@ Label：Controler和Service要想跟每个Pod挂钩，就要有可以联系起�
 
 NameSpace: 用来隔离Pod的运行环境，即想要使得几个Pod之间可以互相访问，其他的不能访问进来，就可以使用命名空间的方式隔离，相当于隔离了不同的空间，于是处在空间外部的Pod就没法访问内部的Pod了。
 
-# 资源管理
+## 资源管理
 
 > kubernetes的本质上就是一个集群系统，用户可以在集群中部署各种服务，所谓的部署服务，其实就是在kubernetes集群中运行一个个的容器，并将指定的程序跑在容器中。
 >
@@ -83,7 +83,7 @@ NameSpace: 用来隔离Pod的运行环境，即想要使得几个Pod之间可以
 
 ![image-20200406225334627](https://raw.githubusercontent.com/workcjl/image_store/main/img/k8s.png)
 
-# 环境准备
+## 环境准备
 
 ```shell
 1. #安装必备工具
@@ -238,8 +238,8 @@ Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
 Then you can join any number of worker nodes by running the following on each as root:
 
 kubeadm join 10.211.55.22:6443 --token abcdef.0123456789abcdef \
-	--discovery-token-ca-cert-hash sha256:1f248929dd3ecba8b780f954d0fb896b73406f293c54339db7b2dfb3f9a5fee5
-	
+ --discovery-token-ca-cert-hash sha256:1f248929dd3ecba8b780f954d0fb896b73406f293c54339db7b2dfb3f9a5fee5
+ 
 
 ## 如果报错，就往这个文件里头/etc/docker/daemon.json添加
 vim /etc/docker/daemon.json
@@ -255,7 +255,7 @@ kubeadm init --config init-kubeadm.conf
 
 18. #在node节点上运行
 kubeadm join 10.211.55.22:6443 --token abcdef.0123456789abcdef \
-	--discovery-token-ca-cert-hash sha256:1f248929dd3ecba8b780f954d0fb896b73406f293c54339db7b2dfb3f9a5fee5
+ --discovery-token-ca-cert-hash sha256:1f248929dd3ecba8b780f954d0fb896b73406f293c54339db7b2dfb3f9a5fee5
 ## 成功之后就会提示已加入集群
 his node has joined the cluster:
 * Certificate signing request was sent to apiserver and a response was received.
@@ -304,19 +304,13 @@ kubectl apply -f kube-flannel.yml
 ```shell
 1. #
 kubectl create deployment nginx --image=nginx
-kubectl expose deployment nginx --port=80	--type=NodePort
+kubectl expose deployment nginx --port=80 --type=NodePort
 kubectl get pod,svc
 ```
 
+## Service
 
-
-
-
-# Service
-
-
-
-# 服务发现
+### 服务发现
 
 服务发现的意思就是使用一个注册中心，来记录分布式系统当中的全部服务的信息，方便其他的服务去快速找到这些已经注册的服务。
 
@@ -330,9 +324,7 @@ kubectl exec -it Pod 名字 -- /bin/bash
 curl http: 另一服务的名字：容器端口号
 ```
 
-
-
-# 安全机制
+## 安全机制
 
 1. 认证是告诉我你是谁并证明你是谁
 
@@ -367,21 +359,21 @@ ingress是基于nginx的实现，用来做负载均衡。anotations是ingress中
 
 configMap用来存储配置信息
 
-https://zhuanlan.zhihu.com/p/105006577
+<https://zhuanlan.zhihu.com/p/105006577>
 
-https://www.aliyundrive.com/s/kxsuGkfpvBJ/folder/60f6c879a00ff31ab8344d13993e976b543792ff
+<https://www.aliyundrive.com/s/kxsuGkfpvBJ/folder/60f6c879a00ff31ab8344d13993e976b543792ff>
 
-https://www.yuque.com/sunxiaping/yg511q/od4gy0
+<https://www.yuque.com/sunxiaping/yg511q/od4gy0>
 
-https://zhuanlan.zhihu.com/p/352057834
+<https://zhuanlan.zhihu.com/p/352057834>
 
-https://www.jianshu.com/p/31c70cdc711c
+<https://www.jianshu.com/p/31c70cdc711c>
 
-https://jingyan.baidu.com/article/e4d08ffde67eb44fd3f60d68.html
+<https://jingyan.baidu.com/article/e4d08ffde67eb44fd3f60d68.html>
 
-https://hands-on-tech.github.io/2020/03/15/k8s-jenkins-example.html
+<https://hands-on-tech.github.io/2020/03/15/k8s-jenkins-example.html>
 
-https://zhuanlan.zhihu.com/p/40346581
+<https://zhuanlan.zhihu.com/p/40346581>
 
 k8s问题：
 
@@ -393,9 +385,8 @@ sudo -i
 swapoff -a
 exit
 strace -eopenat kubectl version
-```
 
-```
+
 问题：helm安装ingress-nginx报错
 解决：
 kubectl get clusterrole | grep ingress
@@ -410,8 +401,6 @@ kubectl delete clusterrolebinding ingress-nginx-admission
 
 日志排查： journalctl -f -u kubelet
 
-
-
 ```
 k8s.gcr.io/ingress-nginx/controller:v1.0.0@sha256:0851b34f69f69352bf168e6ccf30e1e20714a264ab1ecd1933e4d8c0fc3215c6
 ```
@@ -424,16 +413,14 @@ k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.0@sha256:f3b6b39a6062328c095337
 k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.0@sha256:f3b6b39a6062328c095337b4cadcefd1612348fdd5190b1dcbcb9b9e90bd8068
 ```
 
+ingress 和ingress route 区别：<https://blog.51cto.com/u_11093860/2516096>
 
+<https://soulchild.cn/2159.html>
 
-ingress 和ingress route 区别：https://blog.51cto.com/u_11093860/2516096
+<https://cloud.tencent.com/developer/article/1638272>
 
-https://soulchild.cn/2159.html
+<http://www.mydlq.club/article/41/>
 
-https://cloud.tencent.com/developer/article/1638272
+<https://www.cnblogs.com/ninejy/p/14152460.html>
 
-http://www.mydlq.club/article/41/
-
-https://www.cnblogs.com/ninejy/p/14152460.html
-
-https://www.cnblogs.com/wenyang321/p/14051973.html
+<https://www.cnblogs.com/wenyang321/p/14051973.html>

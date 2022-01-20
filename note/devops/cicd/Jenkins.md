@@ -1,4 +1,5 @@
 # Jenkins
+
 ## 设置中文
 
 - 下载插件`Locale plugin`
@@ -18,8 +19,8 @@
   方法如下，可以完美修复。
 
   1. 将语言设定为zh_US，Jenkins切换为英文。
-  2. 调用restart重启Jenkins：http://域名/restart。
-  3.  再次语言设定为zh_CN，刷新即可。
+  2. 调用restart重启Jenkins：<http://域名/restart>。
+  3. 再次语言设定为zh_CN，刷新即可。
 
 ## 权限管理
 
@@ -68,7 +69,7 @@
   >
   > SSH Username with private key：使用SSH key作为访问凭证。
 
-###      SSH Username with private key访问gitlab
+### SSH Username with private key访问gitlab
 
 1. 在jenkins所在的服务器(docker-container)当中生成`ssh-keygen -t rsa`，将生成的公钥放入gitlab当中，将生成的私钥在jenkins的凭据当中填入。
 2. 在凭据当中，选择SSH Username with private key，Username填入的是当前在服务器上使用哪个用户运行的ssh-key命令生成的那个人，这里是root。然后点击directly key，将私钥填入即可。
@@ -98,6 +99,3 @@
 
 - 安装插件： SonarQube Scanner
 - 插件作用：用来联通Jenkins和SonarQube，让Jenkins调用SonarQube进行代码审查
-
-
-
