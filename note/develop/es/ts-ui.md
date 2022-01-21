@@ -2,7 +2,7 @@
 
 ## 项目初始化准备
 
-- 全局安装`lerna`：` npm install lerna -g` 
+- 全局安装`lerna`：`npm install lerna -g`
 
 - 使用`lerna`生成项目`package.json`
 
@@ -62,4 +62,4 @@
   }
   ```
 
-- 使用`yarn`生成项目：`yarn `
+- 使用`yarn`生成项目：`yarn`
