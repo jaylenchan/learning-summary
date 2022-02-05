@@ -1,3 +1,6 @@
+use mgrep::Config;
+use std::{env, process};
+
 fn main() {
     let args: Vec<String> = env::args().collect();
     // 为啥不直接args[1]取值
@@ -7,7 +10,7 @@ fn main() {
     });
     println!("Searching for {}", config.query);
     println!("In file {}", config.filename);
-    if let Err(e) = run(config) {
+    if let Err(e) = mgrep::run(config) {
         println!("Application error: {}", e);
         process::exit(1);
     }
