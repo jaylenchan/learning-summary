@@ -16,6 +16,5 @@ mod back_of_house {
         cook_order();
         super::serve_order();
     }
-
     fn cook_order() {}
 }
