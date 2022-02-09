@@ -1,0 +1,2 @@
+{"/Users/work/fe-test/math.js": {"path":"/Users/work/fe-test/math.js","statementMap":{"0":{"start":{"line":1,"column":0},"end":{"line":3,"column":1}},"1":{"start":{"line":2,"column":2},"end":{"line":2,"column":14}}},"fnMap":{"0":{"name":"(anonymous_0)","decl":{"start":{"line":1,"column":14},"end":{"line":1,"column":15}},"loc":{"start":{"line":1,"column":30},"end":{"line":3,"column":1}},"line":1}},"branchMap":{},"s":{"0":1,"1":1},"f":{"0":1},"b":{},"_coverageSchema":"43e27e138ebf9cfc5966b082cf9a028302ed4184","hash":"d4bacfa9f6f34c40caed291c6b80d86d5859ccaf"}
+}
