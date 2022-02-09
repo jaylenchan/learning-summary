@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `
+Object {
+  "port": 80,
+  "server": "http://localhost",
+}
+`;
+
+exports[` 2`] = `
+Object {
+  "domain": "www.baidu.com",
+}
+`;
+
+exports[` 3`] = `
+Object {
+  "time": Any<Date>,
+}
+`;
+
+exports[` 4`] = `
+Object {
+  "time": Any<Date>,
+}
+`;
