@@ -1,6 +1,12 @@
 <template>
-  <div>
-    <input data-test="input" v-model="inputValue" @keyup.enter="addTodoItem" />
+  <div class="wrapper">
+    <h1 class="title">TodoList</h1>
+    <input
+      data-test="input"
+      v-model="inputValue"
+      @keyup.enter="addTodoItem"
+      placeholder="请输入待办事项"
+    />
   </div>
 </template>
 
@@ -28,20 +34,23 @@ export default defineComponent({
 })
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+<style lang="scss" scoped>
+.wrapper {
+  .title {
+    color: #fff;
+  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  input {
+    width: 600px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    text-indent: 20px;
+    outline: none;
+    font-size: 20px;
+  }
 }
 </style>

@@ -2,6 +2,11 @@ import { mount } from '@vue/test-utils'
 import Header from '../components/Header/index.vue'
 
 describe('Header.vue', () => {
+  test('稳定的header样式', () => {
+    const wrapper = mount(Header)
+    expect(wrapper).toMatchSnapshot()
+  })
+
   test('render test', () => {
     const wrapper = mount(Header)
     const input = wrapper.find(`[data-test="input"]`)
