@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div>
     <input data-test="input" v-model="inputValue" @keyup.enter="addTodoItem" />
   </div>
 </template>
@@ -21,7 +21,6 @@ export default defineComponent({
     addTodoItem() {
       if (this.inputValue) {
         this.$emit('add', this.inputValue)
-        window.alert('add emit')
         this.inputValue = ''
       }
     }
