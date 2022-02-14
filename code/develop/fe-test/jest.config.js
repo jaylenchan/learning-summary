@@ -43,7 +43,7 @@ module.exports = {
   // coverageThreshold: null,
 
   // A path to a custom dependency extractor
-  // dependencyExtractor: null,
+  dependencyExtractor: null,
 
   // Make calling deprecated APIs throw helpful error messages
   // errorOnDeprecated: false,
