@@ -1,17 +1,8 @@
-mod factory {
-    pub mod produce_refrigerator {
-        pub fn produce_re() {
-            println!("produce_re")
-        }
-    }
-    pub mod produce_washing_machine {
-        pub fn produce_wash() {
-            println!("produce washing")
-        }
-    }
-}
+use mylib::factory;
 
-use factory::{produce_refrigerator, produce_washing_machine};
+enum Color {
+    red(i32)
+}
 
 fn main() {
     produce_refrigerator::produce_re();
