@@ -8,6 +8,13 @@ fn main() {
         active: bool,
     }
 
+    // 定义一个空结构体
+    struct Empty {}
+
+    // 定义一个元组结构体
+    #[derive(Debug)]
+    struct Point(i32, i32);
+
     // 创建一个结构体实例
     let xiaoming = User {
         name: String::from("xiaoming"),
@@ -47,29 +54,56 @@ fn main() {
         ..user1
     };
     println!("{:#?}", user2);
-
-    // 定义一个元组结构体
-    #[derive(Debug)]
-    struct Point(i32, i32);
-
+    // 创建一个元组结构体实例
     let point_a = Point(32, 32);
-    let point_b = Point(64, 64);
-
     println!("{:?}", point_a);
-    println!("{:?}", point_b);
 
-    // 访问元组结构体中的元素
+    // 访问一个元组结构体中的元素
     let point_c = Point(128, 128);
     let x = point_c.0;
     let y = point_c.1;
-
     println!("{}", x);
     println!("{}", y);
 
-    // 没有任何字段的空结构体
+    // 定义一只狗
     #[derive(Debug)]
-    struct Empty {}
+    struct Dog {
+        name: String,
+        weight: f32,
+        height: f32,
+    }
 
-    let empty = Empty {};
-    println!("{:#?}", empty);
+    // 狗的方法
+    impl Dog {
+        fn get_name(&self) -> &str {
+            &(self.name)[..]
+        }
+
+        fn get_weight(&self) -> f32 {
+            self.weight
+        }
+
+        fn get_height(&self) -> f32 {
+            self.height
+        }
+    }
+
+    // 静态方法
+    impl Dog {
+        fn shout() {
+            println!("wang wang wang!");
+        }
+    }
+
+    // 创建一只狗
+    let dog = Dog {
+        name: String::from("wangcai"),
+        weight: 100.0,
+        height: 70.5,
+    };
+    println!("{:#?}", dog);
+    println!("dog.name = {}", dog.get_name());
+    println!("dog.weight = {}", dog.get_weight());
+    println!("dog.height = {}", dog.get_height());
+    Dog::shout();
 }
