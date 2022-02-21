@@ -80,4 +80,47 @@ fn main() {
     message_move.prin();
     message_write.prin();
     message_change.prin();
+
+    // Option枚举
+    // enum Option<T> {
+    //  Some(T)
+    //  None
+    // }
+
+    let some_number = Some(5);
+    let some_string = Some(String::from("a string"));
+    let none_absent: Option<i32> = None;
+    let x: i32 = 5;
+    let y = x + some_number.unwrap();
+
+    // 使用match去计算带有Some的值
+    let mut sum = 0;
+
+    match some_number {
+        Some(y) => sum = y + x,
+        None => sum = 0 + x,
+        _ => sum = 0 + x,
+    }
+    println!("sum = {}", sum);
+    println!("x + some_number = {}", y);
+    println!("some_string = {:?}", some_string);
+    println!("none_absent = {:?}", none_absent);
+
+    // 函数中使用Option
+    fn plus_one(x: Option<i32>) -> Option<i32> {
+        match x {
+            Some(y) => Some(y + 1),
+            None => None,
+        }
+    }
+
+    let result_none = plus_one(None);
+    let result_some = plus_one(some_number);
+    println!(
+        "result_none={:?} result_some={:?}",
+        result_none, result_some
+    );
+    if let Some(y) = plus_one(Some(4)) {
+        println!("some_number plus one {:?}", y)
+    }
 }
