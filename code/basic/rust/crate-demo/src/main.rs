@@ -1,8 +1,22 @@
 use mylib::factory::{produce_refrigerator, produce_washingmachine};
-extern crate crypto; // 使用外部库
+// extern crate crypto; // 使用外部库
 
-use crate::crypto::digest::Digest;
-use crate::crypto::sha3::Sha3;
+use crypto::digest::Digest;
+use crypto::sha3::Sha3;
+
+/**
+ * 先dependence使用外部包
+ * extern crate 外部包
+ * 再use crate::外部包
+ * extern crate crypto
+ * use crate::crypto
+ */
+// 上下两种方式效果等价
+/**
+ * 先dependence使用外部包
+ * 再use 外部包
+ * use crypto
+ */
 
 mod modA {
     #[derive(Debug)]
