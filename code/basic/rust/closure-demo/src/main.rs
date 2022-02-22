@@ -25,4 +25,43 @@ fn main() {
     let r = exe(5);
 
     println!("r = {}", r);
+
+    // 使用闭包实现缓存
+    #[derive(Debug)]
+    struct Cacher<T>
+    where
+        T: Fn(u32) -> u32,
+    {
+        calculation: T,
+        value: Option<u32>,
+    }
+
+    impl<T> Cacher<T>
+    where
+        T: Fn(u32) -> u32,
+    {
+        fn new(calculation: T) -> Self {
+            Cacher {
+                calculation: calculation,
+                value: None,
+            }
+        }
+
+        fn value(&mut self, arg: u32) -> u32 {
+            match self.value {
+                Some(val) => val,
+                None => {
+                    let val = (self.calculation)(arg);
+                    self.value = Some(val);
+                    val
+                }
+            }
+        }
+    }
+
+    let mut c = Cacher::new(|x| x + 1);
+    let val_1 = c.value(1);
+    println!("val_1 => {}", val_1);
+    let val_2 = c.value(1);
+    println!("val_1 => {}", val_2);
 }
