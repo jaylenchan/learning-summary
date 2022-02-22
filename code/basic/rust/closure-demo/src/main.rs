@@ -25,7 +25,7 @@ fn main() {
     let r = exe(5);
 
     println!("r = {}", r);
-
+    use std::collections::HashMap;
     // 使用闭包实现缓存
     #[derive(Debug)]
     struct Cacher<T>
@@ -33,7 +33,7 @@ fn main() {
         T: Fn(u32) -> u32,
     {
         calculation: T,
-        value: Option<u32>,
+        value: HashMap<u32, Option<u32>>,
     }
 
     impl<T> Cacher<T>
@@ -43,16 +43,23 @@ fn main() {
         fn new(calculation: T) -> Self {
             Cacher {
                 calculation: calculation,
-                value: None,
+                value: HashMap::new(),
             }
         }
 
         fn value(&mut self, arg: u32) -> u32 {
-            match self.value {
-                Some(val) => val,
+            match &(self.value).get(&arg) {
+                Some(val) => match val {
+                    Some(v) => *v,
+                    None => {
+                        let val = (self.calculation)(arg);
+                        self.value.insert(arg, Some(val));
+                        val
+                    }
+                },
                 None => {
                     let val = (self.calculation)(arg);
-                    self.value = Some(val);
+                    self.value.insert(arg, Some(val));
                     val
                 }
             }
@@ -62,6 +69,6 @@ fn main() {
     let mut c = Cacher::new(|x| x + 1);
     let val_1 = c.value(1);
     println!("val_1 => {}", val_1);
-    let val_2 = c.value(1);
-    println!("val_1 => {}", val_2);
+    let val_2 = c.value(2);
+    println!("val_2 => {}", val_2);
 }
