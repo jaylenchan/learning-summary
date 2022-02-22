@@ -59,4 +59,35 @@ fn main() {
     let v5_iter = v5.into_iter();
     let v5: Vec<_> = v5_iter.filter(|x| *x > 1).collect();
     println!("v5 => {:#?}", v5);
+
+    // 自定义迭代器
+    struct Counter {
+        count: u32,
+    }
+    impl Counter {
+        fn new() -> Self {
+            Counter { count: 0 }
+        }
+    }
+    impl Iterator for Counter {
+        type Item = u32;
+        fn next(&mut self) -> Option<Self::Item> {
+            self.count += 1;
+            if self.count < 6 {
+                Some(self.count)
+            } else {
+                None
+            }
+        }
+    }
+
+    let mut counter = Counter::new();
+    for i in 0..6 {
+        if let Some(v) = counter.next() {
+            println!("i={} v={}", i, v);
+        } else {
+            println!("i={} => End", i);
+            break;
+        }
+    }
 }
