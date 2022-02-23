@@ -256,4 +256,16 @@ fn main() {
         1 | 2 | 3 | 4 if y => println!("{}", x), // if y指的是if 1|2|3|4
         _ => println!("else"),
     }
+
+    // 使用@符号，允许我们在创建一个存放值的变量的同时，去测试这个变量的值是否匹配某个模式
+    enum MessageX {
+        Hello { id: i32 },
+    }
+
+    let msg = MessageX::Hello { id: 15 };
+    match msg {
+        MessageX::Hello { id: id_va @ 3..=7 } => println!("yes id_va={}", id_va),
+        MessageX::Hello { id: 10..=20 } => println!("large"),
+        MessageX::Hello { id } => println!("id = {}", id),
+    }
 }
