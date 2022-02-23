@@ -246,7 +246,7 @@ fn main() {
     let y = 10;
     match num {
         Some(num) if num == y => println!("num == y"),
-        Some(num) => println!("num != y"),
+        Some(_) => println!("num != y"),
         None => println!("None"),
     }
 
