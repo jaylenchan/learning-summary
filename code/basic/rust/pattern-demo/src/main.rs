@@ -81,4 +81,64 @@ fn main() {
     // 只能接受不可反驳模式的有：函数、let语句、for循环。【原因：通过不匹配的值的话，程序没法进行有意义的工作】
 
     // 可反驳模式的有：if let和while let。【原因：她们的定义就是为了解决可能失败的情况】
+
+    // 所有模式语法
+    // 1. 匹配字面值
+    let x = 1;
+    match x {
+        1 => println!("one => {}", 1),
+        _ => println!("two => {}", 2),
+    }
+
+    // 2. 匹配命名变量
+    let x = Some(1);
+    let y = 10; // 位置1的y
+    match x {
+        Some(1) => println!("x = {}", 1),
+        Some(y) => println!("y = {}", y), // 此处的y不是位置1的y。此y非彼y。里头的这个y是一个变量，相当于重新声明了一个，覆盖了外边的
+        None => println!("None"),
+    };
+    println!("x={:?}, y={}", x, y); // 此处的y是位置1 的y
+
+    // 3. 多个模式
+    let x = 2;
+    match x {
+        1 | 2 => println!("1OR2"), //匹配1或者2
+        3 => println!("3"),
+        _ => println!("else"),
+    }
+
+    // 4. 通过..匹配
+    let x = 2;
+    match x {
+        1..=5 => println!("1~5"), // 匹配1-5的值（1，2，3，4，5）等价于1|2|3|4|5
+        _ => println!("else"),
+    }
+    let x = 'c';
+    match x {
+        'a'..='j' => println!("a-j"),
+        'k'..='z' => println!("k-z"),
+        _ => println!("else"),
+    }
+
+    // 5. 解构并分解值 = 主要应用：元组、结构体、枚举、引用
+    struct Point {
+        x: i32,
+        y: i32,
+    }
+    // 解构结构体
+    let p = Point { x: 1, y: 2 };
+    let Point { x, y } = p; // 这里就是结构体解构
+    let Point { x: a, y: b } = p; // 也可以改名
+    assert_eq!(x, 1);
+    assert_eq!(y, 2);
+    assert_eq!(a, 1);
+    assert_eq!(b, 2);
+
+    let p = Point { x: 1, y: 0 };
+    match p {
+        Point { x: _, y: 0 } => println!("点在x轴上"),
+        Point { x: 0, y: _ } => println!("点在y轴上"),
+        _ => println!("点在x，y平面上"),
+    }
 }
