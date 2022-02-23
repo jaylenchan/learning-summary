@@ -196,4 +196,41 @@ fn main() {
 
     let ((a, b), PointNest { x, y }) = ((1, 2), PointNest { x: 1, y: 2 });
     println!("a={},b={},x={},y={}", a, b, x, y);
+
+    // 忽略模式中的值
+    fn foo(_: i32, y: i32) {
+        // 使用下划线忽略第一个参数
+        println!("y = {}", y);
+    }
+    foo(1, 2);
+
+    let numbers = (1, 2, 3);
+    match numbers {
+        (one, _, three) => {
+            println!("one={}, three={}", one, three);
+        }
+    }
+
+    // 忽略未使用的变量
+    let _f = 5;
+    let _y = 5;
+
+    let s = Some(String::from("5"));
+    // if let Some(_c) = s {
+    //     // 这里已经将s的所有权移动进去了
+    //     println!("_c ={}", _c);
+    // }
+    // println!("s = {:?}", s); //所以这里没法打印，s已经失去数据所有权了
+    if let Some(_) = s {
+        println!("C=>"); //如果使用_忽略值，那么不会发生所有权转移
+    }
+    println!("s = {:?}", s); // 这里可以打印
+
+    // ..忽略中间值，只匹配中间和最后值
+    let numbers = [1, 2, 3, 4, 5, 6];
+    match numbers {
+        [first, .., last] => {
+            println!("first={}, last={}", first, last);
+        }
+    }
 }
