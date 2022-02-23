@@ -164,4 +164,36 @@ fn main() {
             println!("rgb=({},{},{})", r, g, b)
         }
     }
+
+    // 解构枚举嵌套
+    enum Color {
+        Rgb(i32, i32, i32),
+        Hsv(i32, i32, i32),
+    }
+    enum MessageColor {
+        Quit,
+        Move { x: i32, y: i32 },
+        Write(String),
+        Change(Color),
+    }
+
+    let msg = MessageColor::Change(Color::Hsv(0, 160, 255));
+    match msg {
+        MessageColor::Change(Color::Rgb(r, g, b)) => {
+            println!("rgb = ({},{},{})", r, g, b);
+        }
+        MessageColor::Change(Color::Hsv(h, s, v)) => {
+            println!("hsv = ({},{},{})", h, s, v)
+        }
+        _ => {}
+    }
+
+    // 解构结构体和枚举
+    struct PointNest {
+        x: i32,
+        y: i32,
+    }
+
+    let ((a, b), PointNest { x, y }) = ((1, 2), PointNest { x: 1, y: 2 });
+    println!("a={},b={},x={},y={}", a, b, x, y);
 }
