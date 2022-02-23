@@ -139,6 +139,29 @@ fn main() {
     match p {
         Point { x: _, y: 0 } => println!("点在x轴上"),
         Point { x: 0, y: _ } => println!("点在y轴上"),
-        _ => println!("点在x，y平面上"),
+        Point { x: _, y: _ } => println!("点在x，y平面上"),
+    }
+
+    // 解构枚举
+    enum Message {
+        Quit,
+        Move { x: i32, y: i32 },
+        Write(String),
+        Change(i32, i32, i32),
+    }
+    let msg = Message::Change(0, 160, 255);
+    match msg {
+        Message::Quit => {
+            println!("Quit")
+        }
+        Message::Move { x, y } => {
+            println!("x={}, y={}", x, y);
+        }
+        Message::Write(text) => {
+            println!("text = {}", text);
+        }
+        Message::Change(r, g, b) => {
+            println!("rgb=({},{},{})", r, g, b)
+        }
     }
 }
