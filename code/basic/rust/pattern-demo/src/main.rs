@@ -233,4 +233,27 @@ fn main() {
             println!("first={}, last={}", first, last);
         }
     }
+
+    // 匹配守卫
+    let num = Some(5);
+    match num {
+        Some(x) if x < 5 => println!("x={}", x),
+        Some(x) => println!("x={}", x),
+        None => println!("None"),
+    }
+
+    let num = Some(5);
+    let y = 10;
+    match num {
+        Some(num) if num == y => println!("num == y"),
+        Some(num) => println!("num != y"),
+        None => println!("None"),
+    }
+
+    let x = 4;
+    let y = false;
+    match x {
+        1 | 2 | 3 | 4 if y => println!("{}", x), // if y指的是if 1|2|3|4
+        _ => println!("else"),
+    }
 }
