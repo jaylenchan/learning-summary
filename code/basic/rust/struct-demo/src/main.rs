@@ -9,7 +9,7 @@ fn main() {
     }
 
     // 定义一个空结构体
-    struct Empty {}
+    struct Empty;
 
     // 定义一个元组结构体
     #[derive(Debug)]
