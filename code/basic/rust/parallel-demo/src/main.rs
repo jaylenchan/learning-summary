@@ -1,6 +1,9 @@
 mod msg_pass;
+mod share_state;
 
 use msg_pass::{mpsc, use_mpsc};
+use share_state::use_mutex;
+use std::sync::Arc;
 use std::thread;
 use std::time::Duration;
 
@@ -46,25 +49,53 @@ fn main() {
     //     println!("recv => {}", received);
     // }
 
-    let (tx, rx) = use_mpsc::<&str>();
+    // let (tx, rx) = use_mpsc::<&str>();
 
-    let tx1 = mpsc::Sender::clone(&tx);
+    // let tx1 = mpsc::Sender::clone(&tx);
 
-    thread::spawn(move || {
-        let vec = vec!["I", "Love", "You"];
-        for val in vec {
-            tx.send(val).unwrap();
-        }
-    });
+    // thread::spawn(move || {
+    //     let vec = vec!["I", "Love", "You"];
+    //     for val in vec {
+    //         tx.send(val).unwrap();
+    //     }
+    // });
 
-    thread::spawn(move || {
-        let vec = vec!["Sy", "Baby", "Love"];
-        for val in vec {
-            tx1.send(val).unwrap();
-        }
-    });
+    // thread::spawn(move || {
+    //     let vec = vec!["Sy", "Baby", "Love"];
+    //     for val in vec {
+    //         tx1.send(val).unwrap();
+    //     }
+    // });
 
-    for recv in rx {
-        println!("recv => {}", recv);
+    // for recv in rx {
+    //     println!("recv => {}", recv);
+    // }
+
+    // let m = use_mutex::<i32>(5);
+
+    // {
+    //     let mut num = m.lock().unwrap();
+    //     *num = 6;
+    // }
+
+    // println!("m = {:?}", m);
+
+    let counter = Arc::new(use_mutex(0));
+    let mut handles = vec![];
+
+    for _ in 0..10 {
+        let counter = Arc::clone(&counter);
+        let handle = thread::spawn(move || {
+            let mut num = counter.lock().unwrap();
+
+            *num += 1;
+        });
+        handles.push(handle);
     }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!("Result: {}", *counter.lock().unwrap());
 }
